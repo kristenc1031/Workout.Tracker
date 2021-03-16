@@ -11,4 +11,15 @@ router.put("/api/workouts/:id", (req, res) => {
         { $push: { exercises: req.body } },
         {new: true, runValidators: true}
     ).then(workout => res.json(workout)).catch(err => res.json (err))
-}) 
+})
+router.get("/api/workouts", (req, res) => {
+    Workout.aggregate([
+        {
+            $addFields: {
+                totalDuration: {
+                    $sum: "$exercises.duration",
+                }
+            }
+        }
+    ]).then(workout => res.json(workout)).catch(err => res.json (err))
+})
