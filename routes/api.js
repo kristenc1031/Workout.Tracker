@@ -23,3 +23,7 @@ router.get("/api/workouts", (req, res) => {
         }
     ]).then(workout => res.json(workout)).catch(err => res.json (err))
 })
+
+
+
+module.exports = router;
