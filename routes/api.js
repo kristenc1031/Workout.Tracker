@@ -35,5 +35,10 @@ router.get("/api/workouts/range", (req, res) => {
         }
     ]).sort({_id: -1}).limit(7).then(workout => res.json(workout)).catch(err => res.json (err))
 })
+router.delete("/api/workouts", (req, res) => {
+    Workout.findByIdAndDelete(req.body.id)
+        .then(() => { res.json(true) })
+        .catch(err => res.json (err))
+})
 
 module.exports = router;
